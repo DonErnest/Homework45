@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Task view{% endblock %}
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_view' %}">Создать новую задачу</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <div class = "row justify-content-center pt-5 pb-5">
+        <div class = "task">
+            <h1>Задача</h1>
+            <h2><strong>Описание задачи:</strong> {{ task.description }}</h2>
+            <h3><strong>Статус задачи:</strong> {{ task.get_status_display }}</h3>
+            <p><strong>Дата завершения:</strong> {{ task.completed_at }}</p>
+            <p><strong>Подробно:</strong> {{ task.text|escape|linebreaks }}</p>
+            <div class = "btn-block">
+                <a class = "btn btn-warning" href="{% url 'index' %}">Вернуться на главную страницу</a>
+                <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

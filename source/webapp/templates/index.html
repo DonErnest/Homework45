@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}To-do-list{% endblock %}
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_view' %}">Создать новую задачу</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <h1 class="text-center">To-do list</h1>
+{#    <h4 class ='pt-2 text-center'><a href="{% url 'create_view' %}" class = 'btn btn-warning'>Создать новую задачу</a></h4>#}
+    <div class="row justify-content-center pb-2 pt-2">
+        {% for task in tasks %}
+            <div class="card ml-2 mr-2 mb-2 " style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ task.description }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ task.get_status_display }}</h6>
+                    <div class = "btn-group">
+                        <a class = "btn btn-warning" href="{% url 'task_view' task.pk %}">Посмотреть задачу</a>
+                        <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
