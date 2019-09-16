@@ -1,0 +1,8 @@
+*.sqlite3
+venv
+virtualenv
+__pycache__
+*.pyc
+.idea
+uploads
+settings_local.py
