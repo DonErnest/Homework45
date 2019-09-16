@@ -37,6 +37,25 @@ def create_task_view(request):
         return render(request, 'create_view.html', context={'form': form} )
 
 
+def update_task_view(request,pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'GET':
+        form = TaskForm(data={'description': task.description, 'status': task.status,
+                              'text': task.text, 'completed_at': task.completed_at })
+        return render(request, 'update_view.html', context={'form': form, 'task': task})
+    elif request.method == 'POST':
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.description = form.cleaned_data['description']
+            task.status = form.cleaned_data['status']
+            task.text = form.cleaned_data['text']
+            task.completed_at = form.cleaned_data['completed_at']
+            task.save()
+            return redirect('task_view', pk=task.pk)
+        else:
+            return render(request, 'update_view.html', context={'form':form, 'task': task})
+
+
 def delete(request,pk):
     task = Task.objects.get(pk=pk)
     task.delete()

@@ -2,8 +2,8 @@
 {% block title %}Обновить задачу{% endblock %}
 {% block content %}
     <div class = "d-flex justify-content-center pt-5 pb-5">
-        <form action="{% url 'create_view' %}" method="POST" class = "w-50 pt-3 pb-3">
-            {% include 'partial/task_form.html' with button_text='Создать' %}
+        <form action="{% url 'update_view' task.pk %}" method="POST" class = "w-50 pt-3 pb-3">
+            {% include 'partial/task_form.html' with button_text='Обновить' %}
         </form>
     </div>
 {% endblock %}

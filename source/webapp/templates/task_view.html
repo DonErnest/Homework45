@@ -14,8 +14,9 @@
             <p><strong>Дата завершения:</strong> {{ task.completed_at }}</p>
             <p><strong>Подробно:</strong> {{ task.text|escape|linebreaks }}</p>
             <div class = "btn-block">
-                <a class = "btn btn-warning" href="{% url 'index' %}">Вернуться на главную страницу</a>
+                <a class = "btn btn-warning" href="{% url 'update_view' task.pk %}">Обновить задачу</a>
                 <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
+                <a class = "btn btn-warning" href="{% url 'index' %}">Вернуться на главную страницу</a>
             </div>
         </div>
     </div>
