@@ -31,11 +31,10 @@ def create_task_view(request):
             descr = form.cleaned_data['description']
             status = form.cleaned_data['status']
             text = form.cleaned_data['text']
-            compl_date=form.cleaned_data['completed at']
+            compl_date = form.cleaned_data['completed_at']
             task = Task.objects.create(description=descr, status=status, completed_at=compl_date, text=text)
             return redirect('task_view', pk=task.pk)
-        else:
-            return render(request, 'task_view.html', context={'form':form} )
+        return render(request, 'create_view.html', context={'form': form} )
 
 
 def delete(request,pk):
