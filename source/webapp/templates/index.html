@@ -9,20 +9,32 @@
 {% block content %}
     <h1 class="text-center">To-do list</h1>
 {#    <h4 class ='pt-2 text-center'><a href="{% url 'create_view' %}" class = 'btn btn-warning'>Создать новую задачу</a></h4>#}
-    <div class="row justify-content-center pb-2 pt-2">
-        {% for task in tasks %}
-            <div class="card ml-2 mr-2 mb-2 " style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title text-center">{{ task.description }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ task.get_status_display }}</h6>
-                    <div class = "btn-group btn-group-sm">
-                        <a class = "btn btn-warning" href="{% url 'task_view' task.pk %}">Посмотреть задачу</a>
-                        <a class = "btn btn-warning" href="{% url 'update_view' task.pk %}">Обновить задачу</a>
-                        <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
+    <form method="GET" action="{% url 'delete_selected' %}">
+        {% csrf_token %}
+        <div class="row justify-content-center pb-2 pt-2">
+            {% for task in tasks %}
+                <div class="card ml-2 mr-2 mb-2 " style="width: 18rem;">
+                    <div class="card-header">
+                        <div class="form-check d-inline">
+                            <input class="form-check-input position-relative"
+                                   type="checkbox" name= "delete_check" value={{ task.pk }}>
+                        </div>
+                        <h5 class="card-title text-center d-inline">{{ task.description }}</h5>
                     </div>
+                    <div class="card-body">
 
+                        <h6 class="card-subtitle mb-2 text-muted">{{ task.get_status_display }}</h6>
+                        <div class = "btn-group btn-group-sm">
+                            <a class = "btn btn-warning" href="{% url 'task_view' task.pk %}">Посмотреть задачу</a>
+                            <a class = "btn btn-warning" href="{% url 'update_view' task.pk %}">Обновить задачу</a>
+                            <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <input type="submit" class  = 'btn btn-outline-warning align-self-center' value="Удалить все отмеченные задачи">
+        </div>
+    </form>
 {% endblock %}

@@ -65,3 +65,18 @@ def delete(request,pk):
     elif request.method == 'POST':
         task.delete()
     return redirect('index')
+
+
+def delete_multiple(request, *args, **kwargs):
+    tasks=[]
+    if request.method == 'GET':
+        keys = dict(request.GET)['delete_check']
+        for key in keys:
+            tasks.append(Task.objects.get(pk=int(key)))
+        return render(request, 'delete_multiple.html',context={'tasks': tasks, 'keys': keys})
+    elif request.method == 'POST':
+        keys = dict(request.POST)['delete_check']
+        for key in keys:
+            del_task = Task.objects.get(pk=int(key))
+            del_task.delete()
+        return redirect('index')

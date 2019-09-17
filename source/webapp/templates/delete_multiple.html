@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock %}
+{% block content %}
+     <div class = "row justify-content-center pt-5 pb-5">
+        <div class = "task">
+            <h1>Удаление задач</h1>
+            <h5>Вы уверены, что хотите удалить выбранные задачи?</h5>
+            <form method="POST" action="{% url 'delete_selected' %}">
+                {% csrf_token %}
+                {% for task in tasks %}
+                    <div class="row p-3">
+                        <div class="form-check d-inline position-relative">
+                            <input class="form-check-input position-relative"
+                                   type="hidden" name= "delete_check" value={{ task.pk }}>
+                        </div>
+                        <h4 class="d-inline">{{ task.description }}</h4>
+                    </div>
+                {% endfor %}
+                <input type="submit" class  = 'btn btn-outline-warning' value="Подтвердить" name ='yes'>
+                <a type="submit" class  = 'btn btn-outline-warning' href="{% url 'index' %}">Отмена</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
