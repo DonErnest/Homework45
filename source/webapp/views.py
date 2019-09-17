@@ -59,9 +59,7 @@ def update_task_view(request,pk):
 def delete(request,pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'GET':
-        form = TaskForm(data={'description': task.description, 'status': task.status,
-                              'text': task.text, 'completed_at': task.completed_at})
-        return render(request, 'delete_confirmation.html', context={'form':form,'task':task})
+        return render(request, 'delete_confirmation.html', context={'task':task})
     elif request.method == 'POST':
         task.delete()
     return redirect('index')

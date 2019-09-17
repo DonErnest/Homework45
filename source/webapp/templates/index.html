@@ -21,10 +21,10 @@
                         </div>
                         <h5 class="card-title text-center d-inline">{{ task.description }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
 
-                        <h6 class="card-subtitle mb-2 text-muted">{{ task.get_status_display }}</h6>
-                        <div class = "btn-group btn-group-sm">
+                        <h6 class="card-subtitle mb-2 text-muted mt-auto">{{ task.get_status_display }}</h6>
+                        <div class = "btn-group btn-group-sm mt-auto">
                             <a class = "btn btn-warning" href="{% url 'task_view' task.pk %}">Посмотреть задачу</a>
                             <a class = "btn btn-warning" href="{% url 'update_view' task.pk %}">Обновить задачу</a>
                             <a class = "btn btn-warning" href="{% url 'action_delete' task.pk %}">Удалить задачу</a>
